@@ -17,7 +17,6 @@
         path: /etc/sudoers
         insertbefore: ^\w 
         line: 'Defaults env_keep += SSH_AUTH_SOCK'
-    - name: Clé SSH
     - name: Configurer .bashrc
       lineinfile:
         path: /home/test/.bashrc
