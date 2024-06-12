@@ -1,0 +1,12 @@
+---
+- hosts: web_servers
+  become: true
+  tasks:
+    - name: Install lib_pam 
+      apt:
+        name: libpam-ssh-agent-auth
+        state: latest
+    -name: check install
+      service:
+        name: libpam-ssh-agent-auth
+        state: started
