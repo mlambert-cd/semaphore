@@ -7,8 +7,8 @@
         repo_url: 'https://github.com/mlambert-cd/semaphore'
         dest_path: '/etc/ansible'
         create: yes
-        file_to_copy1: 'https://github.com/mlambert-cd/semaphore/id_rsa'
-        file_to_copy2: 'https://github.com/mlambert-cd/semaphore/id_rsa.pub'
+        file_to_copy1: 'id_rsa'
+        file_to_copy2: 'id_rsa.pub'
         tmp_dir: '/tmp/repo_clone'
   tasks:
     - name: Install lib_pam 
