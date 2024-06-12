@@ -9,13 +9,13 @@
         state: latest
     - name: Configurer .bashrc
       lineinfile:
-        path: /home/costamagna/.bashrc
+        path: /home/test/.bashrc
         insertafter: EOF
         line: 'eval $(ssh-agent)'
         create: yes
     - name: Configurer bash logout
       lineinfile:
-        path: /home/costamagna/.bash_logout
+        path: /home/test/.bash_logout
         insertafter: EOF
         line: 'killall ssh-agent'
         create: yes
