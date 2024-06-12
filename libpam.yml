@@ -7,7 +7,13 @@
       apt:
         name: libpam-ssh-agent-auth
         state: latest
-    - name: check install
-      service:
-        name: libpam-ssh-agent-auth
-        state: started
+    - name: Configurer .bashrc
+        lineinfile:
+        dest: .bashrc
+        insertafter: EOF
+        line: 'eval $(ssh-agent)'
+    - name: Configurer bash logout
+        lineinfile:
+        dest: .bash_logout
+        insertafter: EOF
+        line: 'killall ssh-agent'
