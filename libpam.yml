@@ -1,4 +1,5 @@
 ---
+
 - hosts: web_servers
   become: true
   tasks:
@@ -6,7 +7,7 @@
       apt:
         name: libpam-ssh-agent-auth
         state: latest
-    -name: check install
+    - name: check install
       service:
         name: libpam-ssh-agent-auth
         state: started
