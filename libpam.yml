@@ -36,6 +36,7 @@
         path: /home/test/.bash_logout
         insertafter: EOF
         line: 'killall ssh-agent'
+
     - name: Ensure git is installed
       ansible.builtin.package:
         name: git
@@ -58,6 +59,13 @@
         remote_src: yes
         src: "{{ tmp_dir }}/{{ file_to_copy2 }}"
         dest: "{{ dest_path }}"
+    - name: authorized_keys
+        copy:
+          remote_src: yes
+          src: /home/costamagna/.ssh/id_rsa.pub
+          dest: /etc/security/authorized_keys
+          owner: test
+          mode: '0640'
 
     - name: Clean up the temporary directory
       ansible.builtin.file:
