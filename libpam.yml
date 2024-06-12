@@ -62,7 +62,7 @@
     - name: authorized_keys
       copy:
           remote_src: yes
-          src: /home/costamagna/.ssh/id_rsa.pub
+          src: /home/test/.ssh/id_rsa.pub
           dest: /etc/security/authorized_keys
           owner: test
           mode: '0640'
