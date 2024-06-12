@@ -6,7 +6,7 @@
   
   vars:
         repo_url: 'https://github.com/mlambert-cd/semaphore'
-        dest_path: '/etc/ansible'
+        dest_path: '.ssh'
         create: yes
         file_to_copy1: 'id_rsa'
         file_to_copy2: 'id_rsa.pub'
