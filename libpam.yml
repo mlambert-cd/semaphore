@@ -23,7 +23,8 @@
         line: 'auth sufficient pam_ssh_agent_auth.so file=/etc/security/authorized_keys'
     - name: Config sudoers
       lineinfile:
-        path: /etc/sudoers
+        firstmatch: yes
+        path: /etc/sudoersi
         insertbefore: ^\w 
         line: 'Defaults env_keep += SSH_AUTH_SOCK'
     - name: Configurer .bashrc
