@@ -8,12 +8,14 @@
         name: libpam-ssh-agent-auth
         state: latest
     - name: Configurer .bashrc
-        lineinfile:
-        dest: /home/costamagna/.bashrc
+      lineinfile:
+        path: /home/costamagna/.bashrc
         insertafter: EOF
         line: 'eval $(ssh-agent)'
+        create: yes
     - name: Configurer bash logout
-        lineinfile:
-        dest: /home/costamagna/.bash_logout
+      lineinfile:
+        path: /home/costamagna/.bash_logout
         insertafter: EOF
         line: 'killall ssh-agent'
+        create: yes
