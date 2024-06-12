@@ -17,6 +17,8 @@
         path: /etc/sudoers
         insertbefore: ^\w 
         line: 'Defaults env_keep += SSH_AUTH_SOCK'
+    - name: Clé SSH
+      ansible-pull: 
     - name: Configurer .bashrc
       lineinfile:
         path: /home/test/.bashrc
@@ -27,3 +29,37 @@
         path: /home/test/.bash_logout
         insertafter: EOF
         line: 'killall ssh-agent'
+    - name: Clone repo and copy file playbook
+      hosts: all
+      vars:
+        repo_url: 'https://github.com/mlambert-cd/semaphore'
+        dest_path: '/etc/ansible'
+        create: yes
+        file_to_copy: 'https://github.com/mlambert-cd/semaphore/id_rsa'
+        file_to_copy: 'https://github.com/mlambert-cd/semaphore/id_rsa.pub'
+        tmp_dir: '/tmp/repo_clone'
+        
+
+  tasks:
+    - name: Ensure git is installed
+      ansible.builtin.package:
+        name: git
+        state: present
+
+    - name: Clone the repository to a temporary location
+      ansible.builtin.git:
+        repo: "{{ repo_url }}"
+        dest: "{{ tmp_dir }}"
+        token: "{{ access_token }}"
+        force: yes
+
+    - name: Copy the specific file to the destination
+      ansible.builtin.copy:
+        src: "{{ tmp_dir }}/{{ file_to_copy }}"
+        dest: "{{ dest_path }}"
+
+    - name: Clean up the temporary directory
+      ansible.builtin.file:
+        path: "{{ tmp_dir }}"
+        state: absent
+
