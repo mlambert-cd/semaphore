@@ -3,6 +3,7 @@
 - name: Deployement ssh-agent
   hosts: web_servers
   become: true
+  
   vars:
         repo_url: 'https://github.com/mlambert-cd/semaphore'
         dest_path: '/etc/ansible'
@@ -48,11 +49,13 @@
 
     - name: Copy the specific file to the destination
       ansible.builtin.copy:
+        remote_src: yes
         src: "{{ tmp_dir }}/{{ file_to_copy1 }}"
         dest: "{{ dest_path }}"
   
     - name: Copy the specific file 2 to the destination
       ansible.builtin.copy:
+        remote_src: yes
         src: "{{ tmp_dir }}/{{ file_to_copy2 }}"
         dest: "{{ dest_path }}"
 
