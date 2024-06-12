@@ -66,7 +66,7 @@
           src: /home/test/.ssh/id_rsa.pub
           dest: /etc/security/authorized_keys
           owner: test
-          mode: '0640'
+          mode: '0644'
 
     - name: Clean up the temporary directory
       ansible.builtin.file:
