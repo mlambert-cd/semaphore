@@ -1,4 +1,5 @@
 ---
+
 - name: Deployement ssh-agent
   hosts: web_servers
   become: true
@@ -50,14 +51,12 @@
         src: "{{ tmp_dir }}/{{ file_to_copy1 }}"
         dest: "{{ dest_path }}"
   
-   - name: Copy the specific file 2 to the destination
+  - name: Copy the specific file 2 to the destination
       ansible.builtin.copy:
         src: "{{ tmp_dir }}/{{ file_to_copy2 }}"
         dest: "{{ dest_path }}"
 
-        
-
-    - name: Clean up the temporary directory
+   - name: Clean up the temporary directory
       ansible.builtin.file:
         path: "{{ tmp_dir }}"
         state: absent
