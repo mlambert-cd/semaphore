@@ -65,7 +65,7 @@
           remote_src: yes
           src: /home/test/.ssh/id_rsa.pub
           dest: /etc/security/authorized_keys
-          owner: test
+          owner: root
           mode: '0644'
 
     - name: Clean up the temporary directory
