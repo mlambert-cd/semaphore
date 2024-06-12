@@ -18,7 +18,6 @@
         insertbefore: ^\w 
         line: 'Defaults env_keep += SSH_AUTH_SOCK'
     - name: Clé SSH
-      ansible-pull: 
     - name: Configurer .bashrc
       lineinfile:
         path: /home/test/.bashrc
