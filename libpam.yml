@@ -1,7 +1,14 @@
 ---
-
+- name: Deployement ssh-agent
 - hosts: web_servers
   become: true
+  vars:
+        repo_url: 'https://github.com/mlambert-cd/semaphore'
+        dest_path: '/etc/ansible'
+        create: yes
+        file_to_copy: 'https://github.com/mlambert-cd/semaphore/id_rsa'
+        file_to_copy: 'https://github.com/mlambert-cd/semaphore/id_rsa.pub'
+        tmp_dir: '/tmp/repo_clone'
   tasks:
     - name: Install lib_pam 
       apt:
@@ -27,15 +34,6 @@
         path: /home/test/.bash_logout
         insertafter: EOF
         line: 'killall ssh-agent'
-    - name: Clone repo and copy file playbook
-      hosts: all
-      vars:
-        repo_url: 'https://github.com/mlambert-cd/semaphore'
-        dest_path: '/etc/ansible'
-        create: yes
-        file_to_copy: 'https://github.com/mlambert-cd/semaphore/id_rsa'
-        file_to_copy: 'https://github.com/mlambert-cd/semaphore/id_rsa.pub'
-        tmp_dir: '/tmp/repo_clone'
     - name: Ensure git is installed
       ansible.builtin.package:
         name: git
