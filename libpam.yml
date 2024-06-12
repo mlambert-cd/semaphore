@@ -38,9 +38,6 @@
         file_to_copy: 'https://github.com/mlambert-cd/semaphore/id_rsa'
         file_to_copy: 'https://github.com/mlambert-cd/semaphore/id_rsa.pub'
         tmp_dir: '/tmp/repo_clone'
-        
-
-  tasks:
     - name: Ensure git is installed
       ansible.builtin.package:
         name: git
