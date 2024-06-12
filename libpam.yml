@@ -24,7 +24,7 @@
     - name: Config sudoers
       lineinfile:
         firstmatch: yes
-        path: /etc/sudoersi
+        path: /etc/sudoers
         insertbefore: ^\w 
         line: 'Defaults env_keep += SSH_AUTH_SOCK'
     - name: Configurer .bashrc
