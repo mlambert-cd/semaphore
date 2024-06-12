@@ -1,13 +1,13 @@
 ---
 - name: Deployement ssh-agent
-- hosts: web_servers
+  hosts: web_servers
   become: true
   vars:
         repo_url: 'https://github.com/mlambert-cd/semaphore'
         dest_path: '/etc/ansible'
         create: yes
-        file_to_copy: 'https://github.com/mlambert-cd/semaphore/id_rsa'
-        file_to_copy: 'https://github.com/mlambert-cd/semaphore/id_rsa.pub'
+        file_to_copy1: 'https://github.com/mlambert-cd/semaphore/id_rsa'
+        file_to_copy2: 'https://github.com/mlambert-cd/semaphore/id_rsa.pub'
         tmp_dir: '/tmp/repo_clone'
   tasks:
     - name: Install lib_pam 
@@ -48,7 +48,8 @@
 
     - name: Copy the specific file to the destination
       ansible.builtin.copy:
-        src: "{{ tmp_dir }}/{{ file_to_copy }}"
+        src: "{{ tmp_dir }}/{{ file_to_copy1 }}"
+        src: "{{ tmp_dir }}/{{ file_to_copy2 }}"
         dest: "{{ dest_path }}"
 
     - name: Clean up the temporary directory
