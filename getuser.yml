@@ -2,6 +2,6 @@
 - hosts: web_servers
   become: true
   tasks:
-    -  name: get the non root remote user
-      set_fact:
-      remote_regular_user: "{{ ansible_env.SUDO_USER or ansible_user_id }}"
+   -  name: get the non root remote user
+        set_fact:
+        remote_regular_user: "{{ ansible_env.SUDO_USER or ansible_user_id }}"
