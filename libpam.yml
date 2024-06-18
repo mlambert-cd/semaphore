@@ -5,7 +5,7 @@
   become: true
   
   vars:
-        repo_url: 'https://github.com/mlambert-cd/semaphore'
+        repo_url: 'https://github.com/mlambert-cd/semaphore.git'
         dest_path: '/home/costamagna/.ssh/'
         create: yes
         file_to_copy1: 'id_rsa'
