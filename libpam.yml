@@ -6,7 +6,7 @@
   
   vars:
         repo_url: 'https://github.com/mlambert-cd/semaphore'
-        dest_path: '/home/test/.ssh/'
+        dest_path: '/home/costamagna/.ssh/'
         create: yes
         file_to_copy1: 'id_rsa'
         file_to_copy2: 'id_rsa.pub'
@@ -29,12 +29,12 @@
         line: 'Defaults env_keep += SSH_AUTH_SOCK'
     - name: Configurer .bashrc
       lineinfile:
-        path: /home/test/.bashrc
+        path: /home/costamagna/.bashrc
         insertafter: EOF
         line: 'eval $(ssh-agent)'
     - name: Configurer bash logout
       lineinfile:
-        path: /home/test/.bash_logout
+        path: /home/costamagna/.bash_logout
         insertafter: EOF
         line: 'killall ssh-agent'
 
@@ -63,7 +63,7 @@
     - name: authorized_keys
       copy:
           remote_src: yes
-          src: /home/test/.ssh/id_rsa.pub
+          src: /home/costamagna/.ssh/id_rsa.pub
           dest: /etc/security/authorized_keys
           owner: root
           mode: '0644'
