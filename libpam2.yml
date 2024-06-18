@@ -1,0 +1,60 @@
+---
+
+- name: Deployement ssh-agent
+  hosts: web_servers
+  become: true
+  
+  vars:
+        repo_path: '/home/costamagna/semaphore'
+        dest_path: '/home/test/.ssh'
+        create: yes
+        file_to_copy1: 'id_rsa'
+        file_to_copy2: 'id_rsa.pub'
+  tasks:
+    - name: Install lib_pam 
+      apt:
+        name: libpam-ssh-agent-auth
+        state: latest
+    - name: sudo
+      lineinfile:
+        path: /etc/pam.d/sudo
+        insertafter: (#%)
+        line: 'auth sufficient pam_ssh_agent_auth.so file=/etc/security/authorized_keys'
+    - name: Config sudoers
+      lineinfile:
+        firstmatch: yes
+        path: /etc/sudoers
+        insertbefore: ^\w 
+        line: 'Defaults env_keep += SSH_AUTH_SOCK'
+    - name: Configurer .bashrc
+      lineinfile:
+        path: /home/costamagna/.bashrc
+        insertafter: EOF
+        line: 'eval $(ssh-agent)'
+    - name: Configurer bash logout
+      lineinfile:
+        path: /home/costamagna/.bash_logout
+        insertafter: EOF
+        line: 'killall ssh-agent'
+
+    - name: Ensure git is installed
+      ansible.builtin.package:
+        name: git
+        state: present
+
+
+    - name: Copy the specific file to the destination
+      ansible.builtin.copy:
+        src: "{{ repo_path }}/{{ file_to_copy1 }}"
+        dest: "{{ dest_path }}"
+  
+    - name: Copy the specific file 2 to the destination
+      ansible.builtin.copy:
+        src: "{{ repo_path }}/{{ file_to_copy2 }}"
+        dest: "{{ dest_path }}"
+    - name: authorized_keys
+      lineinfile:
+          path: /etc/security/authorized_keys
+          insertafter: EOF
+          line: " {{lookup('file','/home/costamagna/.ssh/id_rsa.pub') }}"
+          
